@@ -1,11 +1,15 @@
-import { runDay1DropdownSelect } from "./flows/day1.dropdownSelect";
-import { runDay1DynamicLoading } from "./flows/day1.dynamicLoading";
-import { runDay1FormSubmit } from "./flows/day1.formSubmit";
+import { runDay1DynamicLoading } from './flows/day1.dynamicLoading';
+import { runDay1FormSubmit } from './flows/day1.formSubmit';
+import { runDay1DropdownSelect } from './flows/day1.dropdownSelect';
+import { connectSpareRoom } from './flows/spareroom/connect';
+import { checkSpareRoomSession } from './flows/spareroom/check';
 
-const flows: Record<string, () => Promise<string | string[]>> = {
-  "1": runDay1DynamicLoading,
-  "2": runDay1FormSubmit,
-  "3": runDay1DropdownSelect
+const flows: Record<string, () => Promise<any>> = {
+  '1': runDay1DynamicLoading,
+  '2': runDay1FormSubmit,
+  '3': runDay1DropdownSelect,
+  '4': connectSpareRoom,        
+  '5': checkSpareRoomSession,
 };
 
 async function main() {
@@ -13,11 +17,13 @@ async function main() {
 
   if (!choice || !flows[choice]) {
     console.log(`
-Choose a flow to run:
+Choose a flow:
 
 1 → Day 1: Dynamic Loading
 2 → Day 1: Form Submit
 3 → Day 1: Dropdown Select
+4 → Connect SpareRoom (manual login)
+5 → Check SpareRoom session (headless)
 
 Usage:
 npx tsx src/index.ts <number>
@@ -26,7 +32,9 @@ npx tsx src/index.ts <number>
   }
 
   const result = await flows[choice]();
-  console.log("Result:", result);
+  if (result !== undefined) {
+    console.log('Result:', result);
+  }
 }
 
 main().catch(err => {
