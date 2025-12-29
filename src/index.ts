@@ -1,9 +1,11 @@
+import { runDay1DropdownSelect } from "./flows/day1.dropdownSelect";
 import { runDay1DynamicLoading } from "./flows/day1.dynamicLoading";
 import { runDay1FormSubmit } from "./flows/day1.formSubmit";
 
-const flows: Record<string, () => Promise<string>> = {
+const flows: Record<string, () => Promise<string | string[]>> = {
   "1": runDay1DynamicLoading,
   "2": runDay1FormSubmit,
+  "3": runDay1DropdownSelect
 };
 
 async function main() {
@@ -15,6 +17,7 @@ Choose a flow to run:
 
 1 → Day 1: Dynamic Loading
 2 → Day 1: Form Submit
+3 → Day 1: Dropdown Select
 
 Usage:
 npx tsx src/index.ts <number>
