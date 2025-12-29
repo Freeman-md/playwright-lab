@@ -1,11 +1,32 @@
 import { runDay1DynamicLoading } from "./flows/day1.dynamicLoading";
+import { runDay1FormSubmit } from "./flows/day1.formSubmit";
+
+const flows: Record<string, () => Promise<string>> = {
+  "1": runDay1DynamicLoading,
+  "2": runDay1FormSubmit,
+};
 
 async function main() {
-    const result = await runDay1DynamicLoading()
-    console.log('Day 1 result:', result);
+  const choice = process.argv[2];
+
+  if (!choice || !flows[choice]) {
+    console.log(`
+Choose a flow to run:
+
+1 → Day 1: Dynamic Loading
+2 → Day 1: Form Submit
+
+Usage:
+npx tsx src/index.ts <number>
+`);
+    process.exit(0);
+  }
+
+  const result = await flows[choice]();
+  console.log("Result:", result);
 }
 
 main().catch(err => {
-    console.error(err)
-    process.exit(1)
-})
+  console.error(err);
+  process.exit(1);
+});
