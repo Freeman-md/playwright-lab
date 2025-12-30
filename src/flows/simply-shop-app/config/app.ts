@@ -1,0 +1,1 @@
+export const APP_URL = "https://simply-shop-app.lovable.app"
