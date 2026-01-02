@@ -3,7 +3,7 @@ import { Page } from 'playwright'
 import { APP_URL } from "./config/app";
 
 const LOGIN_URL = `${APP_URL}/login`;
-const USERNAME = "johndoegdsdhggjghh@gmail.com"
+const USERNAME = "jamesondoe@gmail.com"
 const PASSWORD = "password"
 
 const ERROR_MAP: Record<number, string> = {
